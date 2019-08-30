@@ -2,6 +2,11 @@ acrox.hd
 acrox.ins
 acrox.pdf
 acrox.sty
+ex_cut.tex
+README
+bibsp.sty
+crypto.bib
+
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
