@@ -176,11 +176,11 @@ Running "make install" installs the files in the local TeX tree.
 % 3 syntax.
 %    \begin{macrocode}
 %<*package>
-\RequirePackage{acro}
 \DeclareOption*{%
-  \PassOptionsToClass{\CurrentOption}{acro}%
+  \PassOptionsToPackage{\CurrentOption}{acro}%
 }
 \ProcessOptions\relax
+\RequirePackage{acro}
 %    \end{macrocode}
 % The |acro| package uses the LaTeX 3 syntax, so we must turn that on.
 %    \begin{macrocode}
