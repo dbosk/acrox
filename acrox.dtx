@@ -137,8 +137,9 @@ Running "make install" installs the files in the local TeX tree.
 % acronyms are defined, hence this required use.
 %
 % \DescribeMacro{\DeclareAcronym}\marg{key-val}
-% We introduce three new endings: possessive/genitive form, adjective and 
-% adverb forms.
+% We introduce three new endings: possessive/genitive form\footnote{%
+%   Actually from the example given in the |acro| manual.
+% }, adjective and adverb forms.
 % This adds some possible values to fill when defining an acronym.
 % We will use the term \enquote{universal composability} (the noun form) as 
 % an example.
@@ -192,7 +193,9 @@ Running "make install" installs the files in the local TeX tree.
 % \begin{macro}{\acgp}
 % \begin{macro}{\Acg}
 % \begin{macro}{\Acgp}
-% The first form that we provide is the possessive (or genitive) form:
+% The first form that we provide is the possessive (or genitive) form.
+% This is the exact implementation as given as an example in the |acro| 
+% manual (v2.8).
 %    \begin{macrocode}
 \ProvideAcroEnding{possessive-singular}{'s}{'s}
 \ProvideAcroEnding{possessive-plural}{s'}{s'}
