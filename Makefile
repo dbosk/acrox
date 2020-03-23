@@ -8,7 +8,7 @@ UTREE = $(shell kpsewhich --var-value TEXMFHOME)
 all:	$(NAME).pdf
 	test -e README.txt && mv README.txt README || exit 0
 
-$(NAME).pdf: $(NAME).dtx bibsp.sty crypto.bib
+$(NAME).pdf $(NAME).sty: $(NAME).dtx bibsp.sty crypto.bib
 	latexmk -pdf -shell-escape -recorder $(NAME).dtx
 
 clean:
