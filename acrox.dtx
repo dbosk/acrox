@@ -39,7 +39,7 @@ License:| Released under the LaTeX Project Public License v1.3c or later
 \endpreamble
 \postamble
 
-Copyright (C) 2019 by Daniel Bosk <dbosk@kth.se>
+Copyright (C) 2020 by Daniel Bosk <dbosk@kth.se>
 
 This work may be distributed and/or modified under the
 conditions of the LaTeX Project Public License (LPPL), either
@@ -89,7 +89,7 @@ Running "make install" installs the files in the local TeX tree.
 %<package>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 %<package>\ProvidesPackage{acrox}
 %<*package>
-    [2019/08/27 v1.00 acrox, additional endings for acro]
+    [2020/03/24 v1.01 acrox, additional endings for acro]
 %</package>
 %<*driver>
 \documentclass{ltxdoc}
@@ -123,6 +123,7 @@ Running "make install" installs the files in the local TeX tree.
 %\maketitle
 %
 %\changes{v1.00}{2019/08/27}{First public release}
+%\changes{v1.01}{2020/03/24}{Adds long versions with adj/adv forms}
 %
 % \begin{abstract}
 % This package provides a set of additional endings for the acro package.
@@ -234,6 +235,10 @@ Running "make install" installs the files in the local TeX tree.
 % \begin{macro}{\iacadv}
 % \begin{macro}{\Acadv}
 % \begin{macro}{\Iacadv}
+% \begin{macro}{\acladv}
+% \begin{macro}{\iacladv}
+% \begin{macro}{\Acladv}
+% \begin{macro}{\Iacladv}
 % Next, we also want to have an adverb form:
 %    \begin{macrocode}
 \ProvideAcroEnding{adverb}{}{ly}
@@ -257,7 +262,31 @@ Running "make install" installs the files in the local TeX tree.
   \acro_indefinite:
   \acro_use:n {#1}
 }
+\ProvideAcroCommand{\acladv}{%
+  \acro_adverb:
+  \acro_long:n {#1}
+}
+\ProvideAcroCommand{\iacladv}{%
+  \acro_adverb:
+  \acro_indefinite:
+  \acro_long:n {#1}
+}
+\ProvideAcroCommand{\Acladv}{%
+  \acro_adverb:
+  \acro_first_upper:
+  \acro_long:n {#1}
+}
+\ProvideAcroCommand{\Iacladv}{%
+  \acro_adverb:
+  \acro_first_upper:
+  \acro_indefinite:
+  \acro_long:n {#1}
+}
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -269,6 +298,10 @@ Running "make install" installs the files in the local TeX tree.
 % \begin{macro}{\iacadj}
 % \begin{macro}{\Acadj}
 % \begin{macro}{\Iacadj}
+% \begin{macro}{\acladj}
+% \begin{macro}{\iacladj}
+% \begin{macro}{\Acladj}
+% \begin{macro}{\Iacladj}
 % The same for the adjective form:
 %    \begin{macrocode}
 \ProvideAcroEnding{adjective}{}{ly}
@@ -292,7 +325,31 @@ Running "make install" installs the files in the local TeX tree.
   \acro_indefinite:
   \acro_use:n {#1}
 }
+\ProvideAcroCommand{\acladj}{%
+  \acro_adjective:
+  \acro_long:n {#1}
+}
+\ProvideAcroCommand{\iacladj}{%
+  \acro_adjective:
+  \acro_indefinite:
+  \acro_long:n {#1}
+}
+\ProvideAcroCommand{\Acladj}{%
+  \acro_adjective:
+  \acro_first_upper:
+  \acro_long:n {#1}
+}
+\ProvideAcroCommand{\Iacladj}{%
+  \acro_adjective:
+  \acro_first_upper:
+  \acro_indefinite:
+  \acro_long:n {#1}
+}
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
