@@ -143,6 +143,7 @@ Running "make install" installs the files in the local TeX tree.
 % This adds some possible values to fill when defining an acronym.
 % We will use the term \enquote{universal composability} (the noun form) as 
 % an example.
+%
 % \begin{dtxexample}*{Using an acronym as adverb, adjective and noun.}
 % \Iacadv{UC} secure \acadj{UC} framework based on \ac{UC}.\par
 % \Iacadv{UC} secure \acresetall\acadj{UC} framework based on \ac{UC}.\par
@@ -199,8 +200,8 @@ Running "make install" installs the files in the local TeX tree.
 % This is the exact implementation as given as an example in the |acro| 
 % manual (v2.8).
 %    \begin{macrocode}
-\ProvideAcroEnding{possessive-singular}{'s}{'s}
-\ProvideAcroEnding{possessive-plural}{s'}{s'}
+\DeclareAcroEnding{possessive-singular}{'s}{'s}
+\DeclareAcroEnding{possessive-plural}{s'}{s'}
 \ProvideAcroCommand{\acg}{%
   \acro_possessive_singular:
   \acro_use:n {#1}
@@ -236,7 +237,7 @@ Running "make install" installs the files in the local TeX tree.
 % \begin{macro}{\Iacadv}
 % Next, we also want to have an adverb form:
 %    \begin{macrocode}
-\ProvideAcroEnding{adverb}{}{ly}
+\DeclareAcroEnding{adverb}{}{ly}
 \ProvideAcroCommand{\acadv}{%
   \acro_adverb:
   \acro_use:n {#1}
@@ -271,7 +272,7 @@ Running "make install" installs the files in the local TeX tree.
 % \begin{macro}{\Iacadj}
 % The same for the adjective form:
 %    \begin{macrocode}
-\ProvideAcroEnding{adjective}{}{ly}
+\DeclareAcroEnding{adjective}{}{ly}
 \ProvideAcroCommand{\acadj}{%
   \acro_adjective:
   \acro_use:n {#1}
