@@ -8,7 +8,7 @@
 -------:| -----------------------------------------------------------------
   acrox:| Provides additional endings for the `acro` package
  Author:| Daniel Bosk
- E-mail:| dbosk@kth.se
+ E-mail:| daniel@bosk.se
 License:| Released under the LaTeX Project Public License v1.3c or later
     See:| http://www.latex-project.org/lppl.txt
 
@@ -30,16 +30,16 @@ acronym as an adjective or adverb.
 \askforoverwritefalse
 \preamble
 -------:| -----------------------------------------------------------------
-  acrox:| A new LaTeX package
+  acrox:| Provides additional endings for the `acro` package
  Author:| Daniel Bosk
- E-mail:| dbosk@kth.se
+ E-mail:| daniel@bosk.se
 License:| Released under the LaTeX Project Public License v1.3c or later
     See:| http://www.latex-project.org/lppl.txt
 
 \endpreamble
 \postamble
 
-Copyright (C) 2019 by Daniel Bosk <dbosk@kth.se>
+Copyright (C) 2019 by Daniel Bosk <daniel@bosk.se>
 
 This work may be distributed and/or modified under the
 conditions of the LaTeX Project Public License (LPPL), either
@@ -97,7 +97,8 @@ Running "make install" installs the files in the local TeX tree.
 \usepackage[numbered]{hypdoc}
 \usepackage{csquotes}
 \usepackage{dtxdescribe}
-\usepackage{\jobname}
+\usepackage{acro}
+\acsetup{load-style=adx}
 \usepackage{bibsp}
 \usepackage{biblatex}
 \addbibresource{crypto.bib}
@@ -117,12 +118,13 @@ Running "make install" installs the files in the local TeX tree.
 %   This file describes version \fileversion, last revised \filedate.
 %  }
 %}
-%\author{Daniel Bosk\thanks{E-mail: dbosk@kth.se}}
+%\author{Daniel Bosk\thanks{E-mail: daniel@bosk.se}}
 %\date{Released \filedate}
 %
 %\maketitle
 %
 %\changes{v1.00}{2019/08/27}{First public release}
+%\changes{v2.00}{2020/11/13}{Changes to acro's style format}
 %
 % \begin{abstract}
 % This package provides a set of additional endings for the acro package.
