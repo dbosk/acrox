@@ -7,7 +7,9 @@ README
 README.txt
 bibsp.sty
 crypto.bib
-
+acro.style.adx.code.tex
+acro.style.possessive.code.tex
+dtxexample_cut.tex
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

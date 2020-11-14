@@ -1,4 +1,5 @@
 NAME  = acrox
+FILES = acro.style.adx.code.tex acro.style.possessive.code.tex
 SHELL = bash
 PWD   = $(shell pwd)
 VERS  = $(shell ltxfileinfo -v $(NAME).dtx|sed -e 's/^v//')
@@ -8,30 +9,30 @@ UTREE = $(shell kpsewhich --var-value TEXMFHOME)
 all:	$(NAME).pdf
 	test -e README.txt && mv README.txt README || exit 0
 
-$(NAME).pdf: $(NAME).dtx bibsp.sty crypto.bib
+$(NAME).pdf: $(NAME).dtx ${FILES} bibsp.sty crypto.bib
 	latexmk -pdf -shell-escape -recorder $(NAME).dtx
 
 clean:
 	rm -f $(NAME).{aux,fls,glo,gls,hd,idx,ilg,ind,ins,log,out,blg}
 	${RM} acrox.{pdf,sty}
+	${RM} ${FILES}
 	${RM} ex_cut.tex
 	${RM} acrox.{bcf,fdb_latexmk,run.xml}
 	${RM} README
 
 distclean: clean
-	rm -f $(NAME).{pdf,sty}
 	${RM} bibsp.sty crypto.bib
 
 inst: all
 	mkdir -p $(UTREE)/{tex,source,doc}/latex/$(NAME)
 	cp $(NAME).dtx $(UTREE)/source/latex/$(NAME)
-	cp $(NAME).sty $(UTREE)/tex/latex/$(NAME)
+	cp ${FILES} $(UTREE)/tex/latex/$(NAME)
 	cp $(NAME).pdf $(UTREE)/doc/latex/$(NAME)
 
 install: all
 	sudo mkdir -p $(LOCAL)/{tex,source,doc}/latex/$(NAME)
 	sudo cp $(NAME).dtx $(LOCAL)/source/latex/$(NAME)
-	sudo cp $(NAME).sty $(LOCAL)/tex/latex/$(NAME)
+	sudo cp ${FILES} $(LOCAL)/tex/latex/$(NAME)
 	sudo cp $(NAME).pdf $(LOCAL)/doc/latex/$(NAME)
 
 zip: all
