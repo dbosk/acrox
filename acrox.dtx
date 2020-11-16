@@ -86,13 +86,6 @@ Running "make install" installs the files in the local TeX tree.
 % \iffalse
 %<*driver>
 \ProvidesFile{acrox.dtx}
-%</driver>
-%<package>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
-%<package>\ProvidesPackage{acrox}
-%<*package>
-    [2020/11/14 v2.00 acrox, additional endings for acro]
-%</package>
-%<*driver>
 \documentclass{ltxdoc}
 \usepackage[utf8]{inputenc}
 \usepackage[numbered]{hypdoc}
@@ -130,6 +123,7 @@ Running "make install" installs the files in the local TeX tree.
 %\maketitle
 %
 %\changes{v1.00}{2019/08/27}{First public release}
+%\changes{v1.01}{2020/03/24}{Adds long versions with adj/adv forms}
 %\changes{v2.00}{2020/11/14}{Changes to acro's style format}
 %
 % \begin{abstract}
@@ -301,6 +295,10 @@ Running "make install" installs the files in the local TeX tree.
 % \begin{macro}{\iacadj}
 % \begin{macro}{\Acadj}
 % \begin{macro}{\Iacadj}
+% \begin{macro}{\acladj}
+% \begin{macro}{\iacladj}
+% \begin{macro}{\Acladj}
+% \begin{macro}{\Iacladj}
 % We first provide an adjective form.
 %    \begin{macrocode}
 \DeclareAcroEnding{adjective}{}{ly}
@@ -324,7 +322,31 @@ Running "make install" installs the files in the local TeX tree.
   \acroindefinite
   \UseAcroTemplate{first}{#1}%
 }
+\ProvideAcroCommand{\acladj}{m}{%
+  \acroadjective
+  \UseAcroTemplate{long}{#1}%
+}
+\ProvideAcroCommand{\iacladj}{m}{%
+  \acroadjective
+  \acroindefinite
+  \UseAcroTemplate{long}{#1}%
+}
+\ProvideAcroCommand{\Acladj}{m}{%
+  \acroadjective
+  \acroupper
+  \UseAcroTemplate{long}{#1}%
+}
+\ProvideAcroCommand{\Iacladj}{m}{%
+  \acroadjective
+  \acroupper
+  \acroindefinite
+  \UseAcroTemplate{long}{#1}%
+}
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -334,6 +356,10 @@ Running "make install" installs the files in the local TeX tree.
 % \begin{macro}{\iacadv}
 % \begin{macro}{\Acadv}
 % \begin{macro}{\Iacadv}
+% \begin{macro}{\acladv}
+% \begin{macro}{\iacladv}
+% \begin{macro}{\Acladv}
+% \begin{macro}{\Iacladv}
 % We also want to have an adverb form.
 % The code is similar.
 %    \begin{macrocode}
@@ -358,7 +384,31 @@ Running "make install" installs the files in the local TeX tree.
   \acroindefinite
   \UseAcroTemplate{first}{#1}%
 }
+\ProvideAcroCommand{\acladv}{m}{%
+  \acroadverb
+  \UseAcroTemplate{long}{#1}
+}
+\ProvideAcroCommand{\iacladv}{m}{%
+  \acroadverb
+  \acroindefinite
+  \UseAcroTemplate{long}{#1}
+}
+\ProvideAcroCommand{\Acladv}{m}{%
+  \acroadverb
+  \acroupper
+  \UseAcroTemplate{long}{#1}%
+}
+\ProvideAcroCommand{\Iacladv}{m}{%
+  \acroadverb
+  \acroupper
+  \acroindefinite
+  \UseAcroTemplate{long}{#1}%
+}
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}

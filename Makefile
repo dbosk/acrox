@@ -6,10 +6,13 @@ VERS  = $(shell ltxfileinfo -v $(NAME).dtx|sed -e 's/^v//')
 LOCAL = $(shell kpsewhich --var-value TEXMFLOCAL)
 UTREE = $(shell kpsewhich --var-value TEXMFHOME)
 
-all:	$(NAME).pdf
+all:	$(NAME).pdf ${FILES}
 	test -e README.txt && mv README.txt README || exit 0
 
 $(NAME).pdf: $(NAME).dtx ${FILES} bibsp.sty crypto.bib
+	latexmk -pdf -shell-escape -recorder $(NAME).dtx
+
+${FILES}: ${NAME}.dtx
 	latexmk -pdf -shell-escape -recorder $(NAME).dtx
 
 clean:
