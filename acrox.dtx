@@ -6,15 +6,15 @@
 %<*readme>
 |
 -------:| -----------------------------------------------------------------
-  acrox:| Provides additional endings for the `acro` package
+  acrox:| Provides additional styles for the `acro` package
  Author:| Daniel Bosk
- E-mail:| dbosk@kth.se
+ E-mail:| daniel@bosk.se
 License:| Released under the LaTeX Project Public License v1.3c or later
     See:| http://www.latex-project.org/lppl.txt
 
 
 Short description:
-Adds additional endings and forms for the `acro` package, e.g. to use an 
+Adds additional styles and forms for the `acro` package, e.g. to use an 
 acronym as an adjective or adverb.
 %</readme>
 %<*internal>
@@ -30,16 +30,16 @@ acronym as an adjective or adverb.
 \askforoverwritefalse
 \preamble
 -------:| -----------------------------------------------------------------
-  acrox:| Provides additional endings for the `acro` package
+  acrox:| Provides additional styles for the `acro` package
  Author:| Daniel Bosk
- E-mail:| dbosk@kth.se
+ E-mail:| daniel@bosk.se
 License:| Released under the LaTeX Project Public License v1.3c or later
     See:| http://www.latex-project.org/lppl.txt
 
 \endpreamble
 \postamble
 
-Copyright (C) 2020 by Daniel Bosk <dbosk@kth.se>
+Copyright (C) 2019--2020 by Daniel Bosk <daniel@bosk.se>
 
 This work may be distributed and/or modified under the
 conditions of the LaTeX Project Public License (LPPL), either
@@ -60,7 +60,8 @@ Running "make install" installs the files in the local TeX tree.
 
 \usedir{tex/latex/acrox}
 \generate{
-  \file{\jobname.sty}{\from{\jobname.dtx}{package}}
+  \file{acro.style.adx.code.tex}{\from{\jobname.dtx}{adx}}
+  \file{acro.style.possessive.code.tex}{\from{\jobname.dtx}{possessive}}
 }
 %</install>
 %<install>\endbatchfile
@@ -85,22 +86,22 @@ Running "make install" installs the files in the local TeX tree.
 % \iffalse
 %<*driver>
 \ProvidesFile{acrox.dtx}
-%</driver>
-%<package>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
-%<package>\ProvidesPackage{acrox}
-%<*package>
-    [2020/03/24 v1.01 acrox, additional endings for acro]
-%</package>
-%<*driver>
 \documentclass{ltxdoc}
 \usepackage[utf8]{inputenc}
 \usepackage[numbered]{hypdoc}
 \usepackage{csquotes}
 \usepackage{dtxdescribe}
-\usepackage{\jobname}
+\usepackage{acro}
+\acsetup{load-style=adx}
+\acsetup{load-style=possessive}
+\DeclareAcronym{MP}{
+  short = MP,
+  long = Member of Parliament,
+}
 \usepackage{bibsp}
 \usepackage{biblatex}
 \addbibresource{crypto.bib}
+\usepackage{bibedu}
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
@@ -113,55 +114,92 @@ Running "make install" installs the files in the local TeX tree.
 % \GetFileInfo{\jobname.dtx}
 % \DoNotIndex{\newcommand,\newenvironment}
 %
-%\title{\textsf{acrox} --- additional endings for \textsf{acro}\thanks{%
+%\title{\textsf{acrox} --- additional styles for \textsf{acro}\thanks{%
 %   This file describes version \fileversion, last revised \filedate.
 %  }
 %}
-%\author{Daniel Bosk\thanks{E-mail: dbosk@kth.se}}
+%\author{Daniel Bosk\thanks{E-mail: daniel@bosk.se}}
 %\date{Released \filedate}
 %
 %\maketitle
 %
 %\changes{v1.00}{2019/08/27}{First public release}
 %\changes{v1.01}{2020/03/24}{Adds long versions with adj/adv forms}
+%\changes{v2.00}{2020/11/14}{Changes to acro's style format}
 %
 % \begin{abstract}
-% This package provides a set of additional endings for the acro package.
+% This package provides a set of additional styles for the acro package.
 % \end{abstract}
 %
 % \section{Usage}
 %
-% Load this package instead of the |acro| package.
-% Then this package will load |acro| and define the additional endings 
-% and their commands.
-% The |acro| package requires that all endings are defined before any 
-% acronyms are defined, hence this required use.
+% This package provides a style file which extends the endings for the 
+% |acro| package.
 %
-% \DescribeMacro{\DeclareAcronym}\marg{key-val}
-% We introduce three new endings: possessive/genitive form\footnote{%
-%   Actually from the example given in the |acro| manual.
-% }, adjective and adverb forms.
+% The |acro| package requires that all endings are defined before any 
+% acronyms are defined, hence this style file must be loaded directly after 
+% loading the |acro| package by |\acsetup{load-style=\marg{style}}|.
+%
+% This package provides two styles: |possessive| and |adx|.
+% |possessive| provides possessive endings, similar to the example in the 
+% |acro| documentation.
+% |adx| provides adjective and adverb endings.
+%
+% \subsection{Adjective and adverb forms}
+%
+% We introduce two new endings: adjective and adverb forms.
 % This adds some possible values to fill when defining an acronym.
 % We will use the term \enquote{universal composability} (the noun form) as 
 % an example.
+%
 % \begin{dtxexample}*{Using an acronym as adverb, adjective and noun.}
 % \Iacadv{UC} secure \acadj{UC} framework based on \ac{UC}.\par
 % \Iacadv{UC} secure \acresetall\acadj{UC} framework based on \ac{UC}.\par
 % \Iacadv{UC} secure \acadj{UC} framework based on \acresetall\ac{UC}.
 % \end{dtxexample}
 %
+% \DescribeMacro{\DeclareAcronym}\marg{key-val}
 % \DescribeKey{long-adjective-form}
 % \DescribeKey{long-adverb-form}
-% \DescribeKey{long-possessive-form}
 % Normally, a \enquote{ly} suffix is added for the long form for both 
 % adjective and adverb.
 % (Nothing is added for the short form.)
 % However, for many acronyms, one must use the \enquote{-form} key provided 
 % by |acro|.
 % For the \ac{UC} acronym, we used
-% |short = UC|, |long = universal composability|,
-% |long-adjective-form = universally composable|,
-% |long-adverb-form = universally composably|.
+% \begin{itemize}
+% \item |short = UC|,
+% \item |long = universal composability|,
+% \item |long-adjective-form = universally composable|,
+% \item |long-adverb-form = universally composably|.
+% \end{itemize}
+%
+% \subsection{Possessive form}
+%
+% This is similar to that in the |acro| manual, however, it's extended a 
+% bit.
+% Since \enquote{p} is already used for plural, we will use \enquote{g} for 
+% genitive form.
+%
+% \begin{dtxexample}*{Using possessive case.}
+% \Iacg{MP} salary is the \acgp{MP} business.
+% \end{dtxexample}
+%
+% \DescribeMacro{\DeclareAcronym}\marg{key-val}
+% \DescribeKey{short-possessiveS}
+% \DescribeKey{short-possessiveP}
+% \DescribeKey{short-possessiveS-form}
+% \DescribeKey{short-possessiveP-form}
+% \DescribeKey{long-possessiveS}
+% \DescribeKey{long-possessiveP}
+% \DescribeKey{long-possessiveS-form}
+% \DescribeKey{long-possessiveP-form}
+% Normally we just add \enquote{'s} at the end of singular, \enquote{'} at 
+% the end of plural.
+% However, sometimes we must override this.
+% We can override the defaults by setting the ending for short forms 
+% (|short-possessive|), the ending for long forms (|long-possessive|).
+% But we can set the final form directly through the |*-form| keys.
 %
 %\StopEventually{^^A
 %  \PrintChanges
@@ -170,28 +208,18 @@ Running "make install" installs the files in the local TeX tree.
 %
 % \section{Implementation}
 %
-% The first thing to do is to load the |acro| package.
-% We don't provide any additional options, but want to pass all options the 
-% real |acro| package.
-% and turn on the LaTeX 
-% 3 syntax.
+% We provide separate style files for the different endings.
+%
+% \subsection{Possessive form}
+%
+% The first thing to do is to declare which style is loaded.
 %    \begin{macrocode}
-%<*package>
-\DeclareOption*{%
-  \PassOptionsToPackage{\CurrentOption}{acro}%
-}
-\ProcessOptions\relax
-\RequirePackage{acro}
-%    \end{macrocode}
-% The |acro| package uses the LaTeX 3 syntax, so we must turn that on.
-%    \begin{macrocode}
-\ExplSyntaxOn
+%<*possessive>
+\AcroStyle{possessive}
 %    \end{macrocode}
 %
-% \subsection{Possessive (genitive) form}
-%
-% \begin{macro}{possessive-singular}
-% \begin{macro}{possessive-plural}
+% \begin{macro}{possessiveS}
+% \begin{macro}{possessiveP}
 % \begin{macro}{\acg}
 % \begin{macro}{\acgp}
 % \begin{macro}{\Acg}
@@ -200,25 +228,47 @@ Running "make install" installs the files in the local TeX tree.
 % This is the exact implementation as given as an example in the |acro| 
 % manual (v2.8).
 %    \begin{macrocode}
-\ProvideAcroEnding{possessive-singular}{'s}{'s}
-\ProvideAcroEnding{possessive-plural}{s'}{s'}
-\ProvideAcroCommand{\acg}{%
-  \acro_possessive_singular:
-  \acro_use:n {#1}
+\DeclareAcroEnding{possessiveS}{'s}{'s}
+\DeclareAcroEnding{possessiveP}{s'}{s'}
+\ProvideAcroCommand{\acg}{m}{%
+  \acropossessiveS
+  \UseAcroTemplate{first}{#1}%
 }
-\ProvideAcroCommand{\acgp}{%
-  \acro_possessive_plural:
-  \acro_use:n {#1}
+\ProvideAcroCommand{\acgp}{m}{%
+  \acropossessiveP
+  \UseAcroTemplate{first}{#1}%
 }
-\ProvideAcroCommand{\Acg}{%
-  \acro_possessive_singular:
-  \acro_first_upper:
-  \acro_use:n {#1}
+\ProvideAcroCommand{\iacg}{m}{%
+  \acropossessiveS
+  \acroindefinite
+  \UseAcroTemplate{first}{#1}%
 }
-\ProvideAcroCommand{\Acgp}{%
-  \acro_possessive_plural:
-  \acro_first_upper:
-  \acro_use:n {#1}
+\ProvideAcroCommand{\iacgp}{m}{%
+  \acropossessiveP
+  \acroindefinite
+  \UseAcroTemplate{first}{#1}%
+}
+\ProvideAcroCommand{\Acg}{m}{%
+  \acropossessiveS
+  \acroupper
+  \UseAcroTemplate{first}{#1}%
+}
+\ProvideAcroCommand{\Acgp}{m}{%
+  \acropossessiveP
+  \acroupper
+  \UseAcroTemplate{first}{#1}%
+}
+\ProvideAcroCommand{\Iacg}{m}{%
+  \acropossessiveS
+  \acroindefinite
+  \acroupper
+  \UseAcroTemplate{first}{#1}%
+}
+\ProvideAcroCommand{\Iacgp}{m}{%
+  \acropossessiveP
+  \acroindefinite
+  \acroupper
+  \UseAcroTemplate{first}{#1}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -227,73 +277,21 @@ Running "make install" installs the files in the local TeX tree.
 % \end{macro}
 % \end{macro}
 % \end{macro}
+%
+% And that's the end of the |possessive| style implementation.
+%    \begin{macrocode}
+%</possessive>
+%    \end{macrocode}
+%
 %
 % \subsection{Adjective and adverb forms}
 %
-% \begin{environment}{adverb}
-% \begin{macro}{\acadv}
-% \begin{macro}{\iacadv}
-% \begin{macro}{\Acadv}
-% \begin{macro}{\Iacadv}
-% \begin{macro}{\acladv}
-% \begin{macro}{\iacladv}
-% \begin{macro}{\Acladv}
-% \begin{macro}{\Iacladv}
-% Next, we also want to have an adverb form:
+% The first thing to do is to declare which style is loaded.
 %    \begin{macrocode}
-\ProvideAcroEnding{adverb}{}{ly}
-\ProvideAcroCommand{\acadv}{%
-  \acro_adverb:
-  \acro_use:n {#1}
-}
-\ProvideAcroCommand{\iacadv}{%
-  \acro_adverb:
-  \acro_indefinite:
-  \acro_use:n {#1}
-}
-\ProvideAcroCommand{\Acadv}{%
-  \acro_adverb:
-  \acro_first_upper:
-  \acro_use:n {#1}
-}
-\ProvideAcroCommand{\Iacadv}{%
-  \acro_adverb:
-  \acro_first_upper:
-  \acro_indefinite:
-  \acro_use:n {#1}
-}
-\ProvideAcroCommand{\acladv}{%
-  \acro_adverb:
-  \acro_long:n {#1}
-}
-\ProvideAcroCommand{\iacladv}{%
-  \acro_adverb:
-  \acro_indefinite:
-  \acro_long:n {#1}
-}
-\ProvideAcroCommand{\Acladv}{%
-  \acro_adverb:
-  \acro_first_upper:
-  \acro_long:n {#1}
-}
-\ProvideAcroCommand{\Iacladv}{%
-  \acro_adverb:
-  \acro_first_upper:
-  \acro_indefinite:
-  \acro_long:n {#1}
-}
+%<*adx>
+\AcroStyle{adx}
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{environment}
 %
-% \begin{environment}{adjective}
 % \begin{macro}{\acadj}
 % \begin{macro}{\iacadj}
 % \begin{macro}{\Acadj}
@@ -302,48 +300,48 @@ Running "make install" installs the files in the local TeX tree.
 % \begin{macro}{\iacladj}
 % \begin{macro}{\Acladj}
 % \begin{macro}{\Iacladj}
-% The same for the adjective form:
+% We first provide an adjective form.
 %    \begin{macrocode}
-\ProvideAcroEnding{adjective}{}{ly}
-\ProvideAcroCommand{\acadj}{%
-  \acro_adjective:
-  \acro_use:n {#1}
+\DeclareAcroEnding{adjective}{}{ly}
+\ProvideAcroCommand{\acadj}{m}{%
+  \acroadjective
+  \UseAcroTemplate{first}{#1}%
 }
-\ProvideAcroCommand{\iacadj}{%
-  \acro_adjective:
-  \acro_indefinite:
-  \acro_use:n {#1}
+\ProvideAcroCommand{\iacadj}{m}{%
+  \acroadjective
+  \acroindefinite
+  \UseAcroTemplate{first}{#1}%
 }
-\ProvideAcroCommand{\Acadj}{%
-  \acro_adjective:
-  \acro_first_upper:
-  \acro_use:n {#1}
+\ProvideAcroCommand{\Acadj}{m}{%
+  \acroadjective
+  \acroupper
+  \UseAcroTemplate{first}{#1}%
 }
-\ProvideAcroCommand{\Iacadj}{%
-  \acro_adjective:
-  \acro_first_upper:
-  \acro_indefinite:
-  \acro_use:n {#1}
+\ProvideAcroCommand{\Iacadj}{m}{%
+  \acroadjective
+  \acroupper
+  \acroindefinite
+  \UseAcroTemplate{first}{#1}%
 }
-\ProvideAcroCommand{\acladj}{%
-  \acro_adjective:
-  \acro_long:n {#1}
+\ProvideAcroCommand{\acladj}{m}{%
+  \acroadjective
+  \UseAcroTemplate{long}{#1}%
 }
-\ProvideAcroCommand{\iacladj}{%
-  \acro_adjective:
-  \acro_indefinite:
-  \acro_long:n {#1}
+\ProvideAcroCommand{\iacladj}{m}{%
+  \acroadjective
+  \acroindefinite
+  \UseAcroTemplate{long}{#1}%
 }
-\ProvideAcroCommand{\Acladj}{%
-  \acro_adjective:
-  \acro_first_upper:
-  \acro_long:n {#1}
+\ProvideAcroCommand{\Acladj}{m}{%
+  \acroadjective
+  \acroupper
+  \UseAcroTemplate{long}{#1}%
 }
-\ProvideAcroCommand{\Iacladj}{%
-  \acro_adjective:
-  \acro_first_upper:
-  \acro_indefinite:
-  \acro_long:n {#1}
+\ProvideAcroCommand{\Iacladj}{m}{%
+  \acroadjective
+  \acroupper
+  \acroindefinite
+  \UseAcroTemplate{long}{#1}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -354,12 +352,71 @@ Running "make install" installs the files in the local TeX tree.
 % \end{macro}
 % \end{macro}
 % \end{macro}
-% \end{environment}
 %
-% And that's the end of the package implementation.
+% \begin{macro}{\acadv}
+% \begin{macro}{\iacadv}
+% \begin{macro}{\Acadv}
+% \begin{macro}{\Iacadv}
+% \begin{macro}{\acladv}
+% \begin{macro}{\iacladv}
+% \begin{macro}{\Acladv}
+% \begin{macro}{\Iacladv}
+% We also want to have an adverb form.
+% The code is similar.
 %    \begin{macrocode}
-\ExplSyntaxOff
-\endinput
-%</package>
+\DeclareAcroEnding{adverb}{}{ly}
+\ProvideAcroCommand{\acadv}{m}{%
+  \acroadverb
+  \UseAcroTemplate{first}{#1}%
+}
+\ProvideAcroCommand{\iacadv}{m}{%
+  \acroadverb
+  \acroindefinite
+  \UseAcroTemplate{first}{#1}%
+}
+\ProvideAcroCommand{\Acadv}{m}{%
+  \acroadverb
+  \acroupper
+  \UseAcroTemplate{first}{#1}%
+}
+\ProvideAcroCommand{\Iacadv}{m}{%
+  \acroadverb
+  \acroupper
+  \acroindefinite
+  \UseAcroTemplate{first}{#1}%
+}
+\ProvideAcroCommand{\acladv}{m}{%
+  \acroadverb
+  \UseAcroTemplate{long}{#1}
+}
+\ProvideAcroCommand{\iacladv}{m}{%
+  \acroadverb
+  \acroindefinite
+  \UseAcroTemplate{long}{#1}
+}
+\ProvideAcroCommand{\Acladv}{m}{%
+  \acroadverb
+  \acroupper
+  \UseAcroTemplate{long}{#1}%
+}
+\ProvideAcroCommand{\Iacladv}{m}{%
+  \acroadverb
+  \acroupper
+  \acroindefinite
+  \UseAcroTemplate{long}{#1}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% And that's the end of the |adx| style implementation.
+%    \begin{macrocode}
+%</adx>
 %    \end{macrocode}
 %\Finale
